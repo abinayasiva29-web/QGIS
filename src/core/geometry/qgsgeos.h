@@ -221,7 +221,20 @@ class CORE_EXPORT QgsGeos: public QgsGeometryEngine
      * \returns subdivided geometry
      */
     std::unique_ptr< QgsAbstractGeometry > subdivide( int maxNodes, QString *errorMsg SIP_OUT = nullptr, const QgsGeometryParameters &parameters = QgsGeometryParameters() ) const;
-
+    /**
+     * Combines this geometry with another geometry or a list of geometries.
+     *
+     * This method performs a **union operation** (OverlayUnion) on the geometries.
+     * The resulting geometry contains all the input geometries combined.
+     *
+     * \note This behavior clarifies the API: the method returns a union, not a dissolve.
+     *
+     * \param geom Pointer to the geometry to combine with.
+     * \param errorMsg Optional error message pointer if operation fails.
+     * \param parameters Optional QgsGeometryParameters controlling the combination.
+     *
+     * \returns The combined geometry as a new QgsAbstractGeometry object.
+     */
     QgsAbstractGeometry *combine( const QgsAbstractGeometry *geom, QString *errorMsg = nullptr, const QgsGeometryParameters &parameters = QgsGeometryParameters() ) const override;
     QgsAbstractGeometry *combine( const QVector<QgsAbstractGeometry *> &geomList, QString *errorMsg, const QgsGeometryParameters &parameters = QgsGeometryParameters() ) const override;
     QgsAbstractGeometry *combine( const QVector< QgsGeometry > &, QString *errorMsg = nullptr, const QgsGeometryParameters &parameters = QgsGeometryParameters() ) const override;
