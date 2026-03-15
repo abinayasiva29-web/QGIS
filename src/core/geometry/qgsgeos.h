@@ -220,6 +220,18 @@ class CORE_EXPORT QgsGeos : public QgsGeometryEngine
      * \returns subdivided geometry
      */
     std::unique_ptr< QgsAbstractGeometry > subdivide( int maxNodes, QString *errorMsg SIP_OUT = nullptr, const QgsGeometryParameters &parameters = QgsGeometryParameters() ) const;
+    /**
+     * Returns the union of this geometry with the specified geometry or geometries.
+     *
+     * Internally uses the OverlayUnion operation.
+     *
+     * \param geom Geometry to union with (single-geometry overload)
+     * \param geomList List of geometries to union with (vector overloads)
+     * \param errorMsg Will be set to a descriptive error string if the operation fails
+     * \param parameters Optional geometry parameters controlling the result
+     *
+     * \returns Resulting union geometry
+     */
 
     QgsAbstractGeometry *combine( const QgsAbstractGeometry *geom, QString *errorMsg = nullptr, const QgsGeometryParameters &parameters = QgsGeometryParameters() ) const override;
     QgsAbstractGeometry *combine( const QVector<QgsAbstractGeometry *> &geomList, QString *errorMsg, const QgsGeometryParameters &parameters = QgsGeometryParameters() ) const override;
